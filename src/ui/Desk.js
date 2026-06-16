@@ -3,6 +3,7 @@ import { EVIDENCE_BY_ID } from '../data/evidence.js';
 import { LOCATIONS, LOCATION_BY_ID } from '../data/locations.js';
 import { DEDUCTIONS } from '../data/deductions.js';
 import { escapeHtml } from './Hud.js';
+import { DeskTutorial } from './DeskTutorial.js';
 
 // The researcher's desk (DESK mode): a 2D pinboard overlay.
 //  * Inventory of collected fragments (left).
@@ -23,6 +24,7 @@ export class Desk {
     this._drag = null;
     this._built = false;
     this._open = false;
+    this.tutorial = new DeskTutorial(this.root);
   }
 
   get isOpen() {
@@ -37,9 +39,12 @@ export class Desk {
     // focus first interactive element for keyboard users
     const first = this.root.querySelector('.chip, .node, .desk-close');
     if (first) first.focus();
+    // First time at the desk: run the guided walkthrough.
+    if (!DeskTutorial.seen()) this.tutorial.start();
   }
 
   close() {
+    this.tutorial.stop();
     this.root.hidden = true;
     this._open = false;
     this.selected = null;
@@ -54,6 +59,7 @@ export class Desk {
         <header class="desk-head">
           <h2>Researcher's Desk</h2>
           <p class="desk-hint">Pin a source to the place it speaks of. Prove a connection and the ship will answer.</p>
+          <button class="desk-help" aria-label="Show the desk tutorial">? &nbsp;Tutorial</button>
           <button class="desk-close" aria-label="Close desk (Tab)">Close ⟵ Tab</button>
         </header>
         <section class="desk-inventory" aria-label="Collected evidence">
@@ -99,6 +105,9 @@ export class Desk {
 
     this.root.querySelector('.desk-close').addEventListener('click', () => {
       bus.emit('desk:requestClose');
+    });
+    this.root.querySelector('.desk-help').addEventListener('click', () => {
+      this.tutorial.start();
     });
 
     // pointer drag handlers (delegated)

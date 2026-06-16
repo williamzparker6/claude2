@@ -32,6 +32,82 @@
 }
 .desk-close:hover { border-color: var(--brass); }
 .desk-close:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.desk-help {
+  font-family: var(--serif); font-size: 0.9rem; color: var(--brass-bright);
+  background: rgba(40,32,15,0.7); border: 1px solid var(--panel-edge);
+  border-radius: 8px; padding: 7px 14px; cursor: pointer; margin-left: auto;
+}
+.desk-help:hover { border-color: var(--brass); }
+.desk-help:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.desk-head .desk-hint { margin-right: 0; }
+
+/* ----------------------------------------------------------- tutorial --- */
+.desk-tutorial { position: fixed; inset: 0; z-index: 60; animation: tutFade 0.25s ease both; }
+.desk-tutorial.leaving { animation: tutFade 0.2s ease reverse both; }
+@keyframes tutFade { from { opacity: 0; } to { opacity: 1; } }
+
+.tut-spotlight {
+  position: fixed; left: 50%; top: 50%; width: 0; height: 0;
+  border-radius: 14px;
+  box-shadow: 0 0 0 9999px rgba(4, 7, 12, 0.74);
+  border: 1.5px solid rgba(200, 164, 90, 0.85);
+  transition: left 0.38s cubic-bezier(.4,0,.2,1), top 0.38s cubic-bezier(.4,0,.2,1),
+              width 0.38s cubic-bezier(.4,0,.2,1), height 0.38s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+.desk-tutorial.centered .tut-spotlight { border-color: transparent; }
+
+.tut-card {
+  position: fixed; width: min(340px, 86vw);
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: 12px;
+  padding: 18px 20px 16px;
+  box-shadow: var(--shadow), inset 0 0 40px rgba(0,0,0,0.4);
+  transition: left 0.34s cubic-bezier(.4,0,.2,1), top 0.34s cubic-bezier(.4,0,.2,1);
+}
+.desk-tutorial.centered .tut-card {
+  left: 50% !important; top: 50% !important; transform: translate(-50%, -50%);
+  width: min(460px, 90vw); text-align: center; padding: 28px 30px 22px;
+}
+
+.tut-skip {
+  position: absolute; top: 10px; right: 12px;
+  background: none; border: none; color: var(--ink-dim);
+  font-family: var(--serif); font-size: 0.8rem; cursor: pointer; padding: 4px 6px;
+}
+.tut-skip:hover { color: var(--ink); }
+.tut-skip:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 4px; }
+
+.tut-kicker {
+  margin: 0 0 6px; text-transform: uppercase; letter-spacing: 2px;
+  font-size: 0.72rem; color: var(--teal);
+}
+.tut-title { margin: 0 0 8px; color: var(--brass-bright); font-size: 1.2rem; font-weight: 600; }
+.tut-body { margin: 0 0 16px; line-height: 1.6; font-size: 0.95rem; color: var(--ink); }
+
+.tut-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.desk-tutorial.centered .tut-foot { justify-content: center; flex-direction: column; }
+.tut-dots { display: flex; gap: 7px; }
+.tut-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(219,226,232,0.22); transition: background 0.2s ease, transform 0.2s ease;
+}
+.tut-dot.on { background: var(--brass-bright); transform: scale(1.25); }
+.tut-actions { display: flex; gap: 8px; }
+.tut-back, .tut-next {
+  font-family: var(--serif); font-size: 0.9rem; cursor: pointer;
+  border-radius: 8px; padding: 8px 16px; border: 1px solid var(--panel-edge);
+  background: rgba(30,24,15,0.75); color: var(--ink);
+}
+.tut-back:hover:not(:disabled), .tut-next:hover { border-color: var(--brass); }
+.tut-back:disabled { opacity: 0.4; cursor: default; }
+.tut-back:focus-visible, .tut-next:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.tut-next.btn-primary {
+  color: #1a1206; font-weight: 600;
+  background: linear-gradient(180deg, var(--brass-bright), var(--brass));
+  border-color: var(--brass-bright);
+}
 
 .desk-inventory { grid-area: inv; display: flex; flex-direction: column; min-height: 0; }
 .desk-inventory h3, .desk-reader h3 {

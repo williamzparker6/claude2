@@ -11,7 +11,8 @@ export function buildLighting(scene) {
 
   // Cold sky / warm-ish ground bounce. Lifts the decks enough to read the
   // platforming gaps while keeping the void dark and dreamlike.
-  const hemi = new THREE.HemisphereLight(0x6f93b8, 0x241a0c, 0.95);
+  // (Brightened for this test build for easier visibility.)
+  const hemi = new THREE.HemisphereLight(0x7c9ec2, 0x2c2010, 1.25);
   group.add(hemi);
 
   // Key light, slightly warm, casts the only real shadows.

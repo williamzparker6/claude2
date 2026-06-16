@@ -11,8 +11,9 @@ export class SceneManager {
     this.scene = new THREE.Scene();
     // Starless void: near-black with a faint cold tint. Exponential fog dissolves
     // distant geometry so floating decks fade into nothing.
-    this.scene.background = new THREE.Color(0x05080d);
-    this.scene.fog = new THREE.FogExp2(0x070b12, 0.014);
+    this.scene.background = new THREE.Color(0x070b12);
+    // Brightened for this test build: a touch thinner fog so decks read further.
+    this.scene.fog = new THREE.FogExp2(0x0a1018, 0.011);
 
     this.camera = new THREE.PerspectiveCamera(
       68,
@@ -31,7 +32,7 @@ export class SceneManager {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.05;
+    this.renderer.toneMappingExposure = 1.22;
     // Soft contact shadows only — cheap on integrated graphics.
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
