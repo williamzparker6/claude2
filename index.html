@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#05080d" />
+    <title>RMS Meridian — The Boiler Room Discrepancy</title>
+    <!-- Inline favicon (a brass porthole) — avoids any network request. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23070b10'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23c8a45a' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%236fd6e6' opacity='0.55'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <!-- 3D canvas is created and mounted by the renderer -->
+    <div id="app">
+      <div id="canvas-root" aria-hidden="true"></div>
+
+      <!-- HUD overlay (EXPLORE) -->
+      <div id="hud" class="overlay hud" hidden>
+        <div class="hud-crosshair" aria-hidden="true"></div>
+        <div class="hud-top">
+          <div id="hud-objective" class="hud-objective"></div>
+        </div>
+        <div class="hud-bottom">
+          <div id="hud-prompt" class="hud-prompt" role="status" aria-live="polite"></div>
+          <div class="hud-keys">
+            <span><kbd>WASD</kbd> move</span>
+            <span><kbd>Space</kbd> jump</span>
+            <span><kbd>E</kbd> interact</span>
+            <span><kbd>Tab</kbd> desk</span>
+            <span><kbd>Esc</kbd> pause</span>
+          </div>
+        </div>
+        <div id="hud-evidence" class="hud-evidence" aria-label="Evidence collected"></div>
+        <div id="hud-toast" class="hud-toast" role="status" aria-live="polite" hidden></div>
+      </div>
+
+      <!-- Researcher's Desk (DESK) — built/managed by ui/Desk.js -->
+      <div id="desk" class="overlay desk" hidden></div>
+
+      <!-- Intro / Pause / Chapter-end dialogs — managed by ui/Dialog.js -->
+      <div id="dialog-root" class="overlay dialog-root" hidden></div>
+
+      <!-- Click-to-start / pointer-lock helper -->
+      <div id="lock-hint" class="overlay lock-hint" hidden>
+        <p>Click to look around</p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

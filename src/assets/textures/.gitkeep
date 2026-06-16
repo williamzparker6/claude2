@@ -1,0 +1,2 @@
+# Procedural-only build: no binary assets are required for the vertical slice.
+# Drop custom textures here and load them client-side (see README).
